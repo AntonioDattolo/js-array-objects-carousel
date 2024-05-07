@@ -1,19 +1,16 @@
-
+.body{
+    height: 100vh;
+}
 .slide{
     display: none;
 }
 
 .active{
     display: block;
-    object-fit: scale-down;
-   
-    
-    
-    
 }
 img{
-   height: 600px;
-  
+   width: 100%;
+   height: 100%;
 }
 
 i{
@@ -22,8 +19,7 @@ i{
 }
 
 #carousel{
-    object-fit: contain;
-    height: 600px; 
+    height: 70vh;     
     position: relative;
 }
 
@@ -35,4 +31,12 @@ i{
     position:absolute;
     text-align: right;
     padding: 0 0.4rem;
+}
+
+.tumbnails{
+    height: 12vh;
+}
+
+.select:hover{
+    box-shadow: 0px 0px 5px 5px rgba(5, 2, 230, 0.492);
 }
