@@ -30,23 +30,23 @@ let nextSlide;
 setTimeout(function slide(){
     x=0
     element = slides[x]
-    console.log(element.title)
-    element = `<img src=./`+slides[x].image+` class="slide active" value=`+ x + ` alt="#"></img>` 
-    // carousel.append(element)
-    carousel.innerHTML += element 
    
+    // element = `<img src=./`+slides[x].image+` class="active slide" value=`+ x + ` alt="#"></img>` 
+    element = document.createElement("img")
+    element.classList.add("active" , "slide")
+    element.src =`${slides[x].image}`
+    carousel.append(element)
     itemCar.push(element) 
      
-    for(x=1; x < slides.length; x++ ){
+    for(x=1; x < slides.length; x++){
         element = slides[x]
-        console.log(element.title)
-        element = `<img src=./`+slides[x].image+` class="slide" value=`+ x + ` alt="#"></img>` 
-        // carousel.append(element)
-        carousel.innerHTML += element 
-       
+        element = document.createElement("img")
+        element.classList.add("slide")
+        element.src =`${slides[x].image}`
+        carousel.append(element)
         itemCar.push(element) 
     }
-     
+    
     
     // // DEFINIRE FUNZIONE PER CLICK
     
@@ -59,7 +59,7 @@ setTimeout(function slide(){
             let slide = itemCar[x] 
             
             // selezionata la slide impostare comando per cui essa venga resa visibile
-            if(itemCar[x].includes("active")){
+            if(slide.classList.contains("active")){
                 slide.classList.remove("active");
                 imgActive = x;
                 
@@ -68,7 +68,7 @@ setTimeout(function slide(){
         }
         // DOPO IL CICLO DEFINISCO IL NUOVO INDEX DELLA SLIDE A CUI ANDRò AD AGGIUNGIURE ACTIVE
         nextSlide = imgActive + 1;
-        debugger
+        
         
         // Arrivato a fine slide mi serve un reset? SI!
         if(nextSlide >= itemCar.length){
@@ -85,9 +85,9 @@ document.getElementById("prev").addEventListener ( "click" , function() {
     
     // DEFINIRE PASSAGGIO A SLIDE SUCCESSIVE(CICLO)
     
-    for(let x = 0; x < slides.length; x++){
+    for(let x = 0; x < itemCar.length; x++){
         // definire costante per slide selezionata dal ciclo
-        const slide = slides[x]
+        const slide = itemCar[x]
         
         // selezionata la slide impostare comando per cui essa venga resa visibile
         if(slide.classList.contains("active")){
@@ -100,9 +100,9 @@ document.getElementById("prev").addEventListener ( "click" , function() {
     
     // Arrivato a fine slide mi serve un reset? SI!
     if(nextSlide < 0){
-        nextSlide = 3 ;
+        nextSlide = itemCar.length - 1 ;
     }
-    slides[nextSlide].classList.add("active");
+    itemCar[nextSlide].classList.add("active");
     console.log(nextSlide);
     
 })
