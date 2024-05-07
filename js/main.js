@@ -1,4 +1,4 @@
-const slide = [
+const slides = [
     {
         image: 'img/01.webp',
         title: 'Marvel\'s Spiderman Miles Morale',
@@ -21,3 +21,92 @@ const slide = [
         text: 'Marvel\'s Avengers is an epic, third-person, action-adventure game that combines an original, cinematic story with single-player and co-operative gameplay.',
     }
 ];
+let carousel = document.getElementById("carousel")
+let itemCar =[]
+let imgActive;
+let nextSlide;
+
+/// FUNIONE PER STAMPARE TUTTE LE SLIDE IN DISPLAY NONE
+setTimeout(function slide(){
+    x=0
+    element = slides[x]
+    console.log(element.title)
+    element = `<img src=./`+slides[x].image+` class="slide active" value=`+ x + ` alt="#"></img>` 
+    // carousel.append(element)
+    carousel.innerHTML += element 
+   
+    itemCar.push(element) 
+     
+    for(x=1; x < slides.length; x++ ){
+        element = slides[x]
+        console.log(element.title)
+        element = `<img src=./`+slides[x].image+` class="slide" value=`+ x + ` alt="#"></img>` 
+        // carousel.append(element)
+        carousel.innerHTML += element 
+       
+        itemCar.push(element) 
+    }
+     
+    
+    // // DEFINIRE FUNZIONE PER CLICK
+    
+    document.getElementById("next").addEventListener ( "click" , function() {
+        
+        // DEFINIRE PASSAGGIO A SLIDE SUCCESSIVE(CICLO)
+
+        for(let x = 0; x < itemCar.length; x++){
+            // definire costante per slide selezionata dal ciclo
+            let slide = itemCar[x] 
+            
+            // selezionata la slide impostare comando per cui essa venga resa visibile
+            if(itemCar[x].includes("active")){
+                slide.classList.remove("active");
+                imgActive = x;
+                
+            }
+            
+        }
+        // DOPO IL CICLO DEFINISCO IL NUOVO INDEX DELLA SLIDE A CUI ANDRò AD AGGIUNGIURE ACTIVE
+        nextSlide = imgActive + 1;
+        debugger
+        
+        // Arrivato a fine slide mi serve un reset? SI!
+        if(nextSlide >= itemCar.length){
+            nextSlide = 0;
+        }
+    itemCar[nextSlide].classList.add("active");
+   console.log(nextSlide);
+   
+})
+},0)
+
+// DEFINIRE FUNZIONE PER CLICK CONTRARIA
+document.getElementById("prev").addEventListener ( "click" , function() {
+    
+    // DEFINIRE PASSAGGIO A SLIDE SUCCESSIVE(CICLO)
+    
+    for(let x = 0; x < slides.length; x++){
+        // definire costante per slide selezionata dal ciclo
+        const slide = slides[x]
+        
+        // selezionata la slide impostare comando per cui essa venga resa visibile
+        if(slide.classList.contains("active")){
+            slide.classList.remove("active");
+            imgActive = x;
+        }
+    }
+    // DOPO IL CICLO DEFINISCO IL NUOVO INDEX DELLA SLIDE A CUI ANDRò AD AGGIUNGIURE ACTIVE
+    nextSlide = imgActive - 1;
+    
+    // Arrivato a fine slide mi serve un reset? SI!
+    if(nextSlide < 0){
+        nextSlide = 3 ;
+    }
+    slides[nextSlide].classList.add("active");
+    console.log(nextSlide);
+    
+})
+
+
+
+

@@ -1,0 +1,14 @@
+
+.slide{
+    height: 600px ;
+    display: none; 
+}
+
+.active{
+    display: block;
+}
+
+i{
+    color: whitesmoke;
+    font-size: 35px;
+}
