@@ -5,7 +5,15 @@
 
 .active{
     display: block;
-    object-fit: contain;
+    object-fit: scale-down;
+   
+    
+    
+    
+}
+img{
+   height: 600px;
+  
 }
 
 i{
@@ -15,5 +23,16 @@ i{
 
 #carousel{
     object-fit: contain;
-    height: 600px;    
+    height: 600px; 
+    position: relative;
+}
+
+.mytext{
+    color: whitesmoke;
+    font-size: 20px;
+    top:  85%;
+    right: 0%;
+    position:absolute;
+    text-align: right;
+    padding: 0 0.4rem;
 }

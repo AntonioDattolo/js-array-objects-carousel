@@ -21,89 +21,71 @@ const slides = [
         text: 'Marvel\'s Avengers is an epic, third-person, action-adventure game that combines an original, cinematic story with single-player and co-operative gameplay.',
     }
 ];
-let carousel = document.getElementById("carousel")
-let itemCar =[]
+let carousel = document.getElementById("carousel");
+let itemCarousel = []
 let imgActive;
 let nextSlide;
+const btnNext = document.getElementById("next")
+const btnPrev = document.getElementById("prev")
+initial()
+start()
 
-/// FUNIONE PER STAMPARE TUTTE LE SLIDE IN DISPLAY NONE
-setTimeout(function slide(){
-    x=0
-    element = slides[x]
-    element = document.createElement("img")
-    element.classList.add("active" , "slide", "col-10")
-    element.src =`${slides[x].image}`
-    carousel.append(element)
-    itemCar.push(element) 
-     
-    for(x=1; x < slides.length; x++){
-        element = slides[x]
-        element = document.createElement("img")
-        element.classList.add("slide", "col-10")
-        element.src =`${slides[x].image}`
-        carousel.append(element)
-        itemCar.push(element) 
+
+function initial(){
+    for (x = 0; x <= slides.length -1; x++){
+        z = slides[x]
+        let card = document.createElement("div");
+        card.classList.add( "slide")
+        carousel.append(card)
+        card.innerHTML =`<img class="w-100" src="./${z.image}"><h5 class="mytext">${z.title} <br> ${z.text} </h5> `;
+        itemCarousel.push(card) 
     }
+}
+function start(){
+    // for (let x = 1; x < itemCarousel.length; x++) {
+        let element = itemCarousel[0];
+        element.classList.add("active")
+    // }
     
+}
+btnNext.addEventListener("click", function next(){
     
-    // // DEFINIRE FUNZIONE PER CLICK
-    
-    document.getElementById("next").addEventListener ( "click" , function() {
+    for(let x = 0; x < itemCarousel.length; x++){
         
-        // DEFINIRE PASSAGGIO A SLIDE SUCCESSIVE(CICLO)
-
-        for(let x = 0; x < itemCar.length; x++){
-            // definire costante per slide selezionata dal ciclo
-            let slide = itemCar[x] 
-            
-            // selezionata la slide impostare comando per cui essa venga resa visibile
-            if(slide.classList.contains("active")){
-                slide.classList.remove("active");
-                imgActive = x;
-            }
-            
-        }
-        // DOPO IL CICLO DEFINISCO IL NUOVO INDEX DELLA SLIDE A CUI ANDRò AD AGGIUNGIURE ACTIVE
-        nextSlide = imgActive + 1;
+        const slide = itemCarousel[x] 
         
-        
-        // Arrivato a fine slide mi serve un reset? SI!
-        if(nextSlide >= itemCar.length){
-            nextSlide = 0;
-        }
-    itemCar[nextSlide].classList.add("active");
-   console.log(nextSlide);
-   
-})
-},0)
-
-// DEFINIRE FUNZIONE PER CLICK CONTRARIA
-document.getElementById("prev").addEventListener ( "click" , function() {
-    
-    // DEFINIRE PASSAGGIO A SLIDE SUCCESSIVE(CICLO)
-    
-    for(let x = 0; x < itemCar.length; x++){
-        // definire costante per slide selezionata dal ciclo
-        const slide = itemCar[x]
-        
-        // selezionata la slide impostare comando per cui essa venga resa visibile
         if(slide.classList.contains("active")){
-            slide.classList.remove("active");
-            imgActive = x;
+         slide.classList.remove("active");
+         imgActive = x;
         }
+    } 
+    nextSlide = imgActive + 1;
+    //  reset? 
+    if(nextSlide >= itemCarousel.length){
+         nextSlide = 0;
     }
-    // DOPO IL CICLO DEFINISCO IL NUOVO INDEX DELLA SLIDE A CUI ANDRò AD AGGIUNGIURE ACTIVE
-    nextSlide = imgActive - 1;
-    
-    // Arrivato a fine slide mi serve un reset? SI!
-    if(nextSlide < 0){
-        nextSlide = itemCar.length - 1 ;
-    }
-    itemCar[nextSlide].classList.add("active");
+    itemCarousel[nextSlide].classList.add("active");
     console.log(nextSlide);
-    
+
 })
 
-
+btnPrev.addEventListener("click",function previous(x){
+    for(let x = 0; x < itemCarousel.length; x++){
+        
+        const slide = itemCarousel[x] 
+        
+        if(slide.classList.contains("active")){
+         slide.classList.remove("active");
+         imgActive = x;
+        }
+    } 
+    nextSlide = imgActive - 1;
+    //  reset? 
+    if(nextSlide < 0){
+         nextSlide = 4;
+    }
+    itemCarousel[nextSlide].classList.add("active");
+    console.log(nextSlide);
+})
 
 
