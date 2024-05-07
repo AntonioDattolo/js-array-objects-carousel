@@ -1,14 +1,19 @@
 
 .slide{
-    height: 600px ;
-    display: none; 
+    display: none;
 }
 
 .active{
     display: block;
+    object-fit: contain;
 }
 
 i{
     color: whitesmoke;
     font-size: 35px;
+}
+
+#carousel{
+    object-fit: contain;
+    height: 600px;    
 }

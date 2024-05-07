@@ -30,10 +30,8 @@ let nextSlide;
 setTimeout(function slide(){
     x=0
     element = slides[x]
-   
-    // element = `<img src=./`+slides[x].image+` class="active slide" value=`+ x + ` alt="#"></img>` 
     element = document.createElement("img")
-    element.classList.add("active" , "slide")
+    element.classList.add("active" , "slide", "col-10")
     element.src =`${slides[x].image}`
     carousel.append(element)
     itemCar.push(element) 
@@ -41,7 +39,7 @@ setTimeout(function slide(){
     for(x=1; x < slides.length; x++){
         element = slides[x]
         element = document.createElement("img")
-        element.classList.add("slide")
+        element.classList.add("slide", "col-10")
         element.src =`${slides[x].image}`
         carousel.append(element)
         itemCar.push(element) 
@@ -62,7 +60,6 @@ setTimeout(function slide(){
             if(slide.classList.contains("active")){
                 slide.classList.remove("active");
                 imgActive = x;
-                
             }
             
         }
