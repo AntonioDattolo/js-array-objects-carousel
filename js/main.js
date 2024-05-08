@@ -28,11 +28,14 @@ let imgActive;
 let nextSlide;
 const btnNext = document.getElementById("next")
 const btnPrev = document.getElementById("prev")
-let chose = []
+let chose = document.getElementById("ciao")
 let select = []
 initial()
 start()
 generateTumbnail()
+
+
+
 
 
 function initial(){
@@ -47,8 +50,9 @@ function initial(){
 }
 function start(){
     // for (let x = 1; x < itemCarousel.length; x++) {
-        let element = itemCarousel[0];
-        element.classList.add("active")
+        nextSlide = itemCarousel[0];
+        nextSlide.classList.add("active")
+        return nextSlide
     // }
     
 }
@@ -57,13 +61,22 @@ function generateTumbnail(){
         z = slides[x]
         y = itemCarousel[x]
         let nail = document.createElement("button");
-        nail.classList.add(  "col-2" , "select", "btn")
+        nail.classList.add(  "col-2" , "select", "btn", "abc" )
+        nail.setAttribute("value", `${x}`)
         tumbNail.append(nail)
         nail.innerHTML =`<img value="${x}" src="./${z.image}">`;
         select.push(nail)
+        select[x].addEventListener("click", function(){
+            y = nail.value
+            if (itemCarousel[nextSlide].classList.contains("active")) {
+                itemCarousel[nextSlide].classList.remove("active");
+                itemCarousel[y].classList.add("active");
+                nextSlide = y
+            }
+        })
+        nextSlide = 0  
     }
 }
-
 btnNext.addEventListener("click", function next(){
     
     for(let x = 0; x < itemCarousel.length; x++){
@@ -82,7 +95,8 @@ btnNext.addEventListener("click", function next(){
     }
     itemCarousel[nextSlide].classList.add("active");
     console.log(nextSlide);
-
+    clearInterval(unspoken)
+    return itemCarousel[nextSlide]
 })
 
 btnPrev.addEventListener("click",function previous(){
@@ -103,13 +117,16 @@ btnPrev.addEventListener("click",function previous(){
     itemCarousel[nextSlide].classList.add("active");
     console.log(nextSlide);
 })
+ 
 
+
+ 
 ///bonus 1
-function autoplay(){
-    for(let x = 0; x < itemCarousel.length; x++){
-        
-    const slide = itemCarousel[x] 
-    
+
+
+let unspoken = setInterval(function autoplay() {
+    for(let x = 0; x < itemCarousel.length; x++){  
+    const slide = itemCarousel[x]
     if(slide.classList.contains("active")){
      slide.classList.remove("active");
      imgActive = x;
@@ -123,7 +140,4 @@ if(nextSlide >= itemCarousel.length){
 itemCarousel[nextSlide].classList.add("active");
 console.log(nextSlide);
  return nextSlide
-}
-
-
-setInterval(autoplay ,5000);
+} ,5000);
