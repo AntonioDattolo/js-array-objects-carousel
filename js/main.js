@@ -29,11 +29,11 @@ let imgActive;
 let nextSlide;
 const btnNext = document.getElementById("next")
 const btnPrev = document.getElementById("prev")
-let chose = document.getElementById("ciao")
 let select = []
 initial()
 start()
 generateTumbnail()
+let unspoken = setInterval(autoplay,5000)
 
 function initial(){
     for (x = 0; x <= slides.length -1; x++){
@@ -90,6 +90,7 @@ btnNext.addEventListener("click", function next(){
     itemCarousel[nextSlide].classList.add("active");
     console.log(nextSlide);
     clearInterval(unspoken)
+    setInterval(autoplay,5000)
     return itemCarousel[nextSlide]
 })
 
@@ -109,25 +110,26 @@ btnPrev.addEventListener("click",function previous(){
     itemCarousel[nextSlide].classList.add("active");
     console.log(nextSlide);
     clearInterval(unspoken)
+    setInterval(autoplay,5000)
     return itemCarousel[nextSlide]
 })
- 
-///bonus 1
 
-let unspoken = setInterval(function autoplay() {
-    for(let x = 0; x < itemCarousel.length; x++){  
-    const slide = itemCarousel[x]
-    if(slide.classList.contains("active")){
-     slide.classList.remove("active");
-     imgActive = x;
+function autoplay() {
+    for (let x = 0; x < itemCarousel.length; x++) {
+        const slide = itemCarousel[x]
+        if (slide.classList.contains("active")) {
+            slide.classList.remove("active");
+            imgActive = x;
+        }
     }
-} 
-nextSlide = imgActive + 1;
-//  reset? 
-if(nextSlide >= itemCarousel.length){
-     nextSlide = 0;
+    nextSlide = imgActive + 1;
+    //  reset? 
+    if (nextSlide >= itemCarousel.length) {
+        nextSlide = 0;
+    }
+    itemCarousel[nextSlide].classList.add("active");
+    console.log(nextSlide);
+    return nextSlide
 }
-itemCarousel[nextSlide].classList.add("active");
-console.log(nextSlide);
- return nextSlide
-} ,5000);
+
+
