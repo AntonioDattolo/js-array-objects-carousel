@@ -21,6 +21,7 @@ const slides = [
         text: 'Marvel\'s Avengers is an epic, third-person, action-adventure game that combines an original, cinematic story with single-player and co-operative gameplay.',
     }
 ];
+
 let carousel = document.getElementById("carousel");
 let tumbNail = document.getElementById("tumb")
 let itemCarousel = []
@@ -34,10 +35,6 @@ initial()
 start()
 generateTumbnail()
 
-
-
-
-
 function initial(){
     for (x = 0; x <= slides.length -1; x++){
         z = slides[x]
@@ -48,14 +45,13 @@ function initial(){
         itemCarousel.push(card) 
     }
 }
+
 function start(){
-    // for (let x = 1; x < itemCarousel.length; x++) {
-        nextSlide = itemCarousel[0];
-        nextSlide.classList.add("active")
-        return nextSlide
-    // }
-    
+    nextSlide = itemCarousel[0];
+    nextSlide.classList.add("active")
+    return nextSlide 
 }
+
 function generateTumbnail(){
     for (x = 0; x <= slides.length -1; x++){
         z = slides[x]
@@ -77,12 +73,10 @@ function generateTumbnail(){
         nextSlide = 0  
     }
 }
+
 btnNext.addEventListener("click", function next(){
-    
     for(let x = 0; x < itemCarousel.length; x++){
-        
         const slide = itemCarousel[x] 
-        
         if(slide.classList.contains("active")){
          slide.classList.remove("active");
          imgActive = x;
@@ -101,9 +95,7 @@ btnNext.addEventListener("click", function next(){
 
 btnPrev.addEventListener("click",function previous(){
     for(let x = 0; x < itemCarousel.length; x++){
-        
         const slide = itemCarousel[x] 
-        
         if(slide.classList.contains("active")){
          slide.classList.remove("active");
          imgActive = x;
@@ -116,13 +108,11 @@ btnPrev.addEventListener("click",function previous(){
     }
     itemCarousel[nextSlide].classList.add("active");
     console.log(nextSlide);
+    clearInterval(unspoken)
+    return itemCarousel[nextSlide]
 })
  
-
-
- 
 ///bonus 1
-
 
 let unspoken = setInterval(function autoplay() {
     for(let x = 0; x < itemCarousel.length; x++){  
